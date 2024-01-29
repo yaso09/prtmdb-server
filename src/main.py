@@ -164,5 +164,5 @@ def api_req_param(req, param):
     return json.loads('{"error": 1}')
 
 if __name__ == "__main__":
-    app.run(debug=True, port=2552)
+    app.run()
 
