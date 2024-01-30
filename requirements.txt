@@ -1,2 +1,1 @@
-flask
-dotenv
+flask==2.0

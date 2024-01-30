@@ -23,7 +23,7 @@ def toDataURI(txt: str, type="text/plain"):
 
 def getReadme(lang):
     readme_path = os.path.join(
-        os.path.dirname(__file__).replace("src", ""), f"README.{lang}.md"
+        os.path.dirname(__file__), f"README.{lang}.md"
     )
     with open(readme_path, "r", encoding="utf-8") as file:
         if file.readable():
@@ -154,5 +154,5 @@ def api_req_param(req, param):
     return json.loads('{"error": 1}')
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=3000)
+    app.run()
 

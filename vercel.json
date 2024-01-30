@@ -1,8 +1,18 @@
 {
-    "rewrites": [
-        {
-            "source": "/(.*)",
-            "destination": "/src/main"
-        }
-    ]
+  "version": 2,
+  "env": {
+    "FLASK_APP": "index.py"
+  },
+  "builds": [
+    {
+      "src": "./index.py",
+      "use": "@vercel/python"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "/"
+    }
+  ]
 }
