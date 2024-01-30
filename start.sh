@@ -1,3 +1,3 @@
-pyton -m pip install flask
+pyton3 -m pip install flask
 export FLASK_APP=index.py
-python -m flask run
+python3 -m flask run
