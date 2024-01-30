@@ -3,6 +3,7 @@
   "env": {
     "FLASK_APP": "index.py"
   },
+  "installCommand": "pip install flask",
   "builds": [
     {
       "src": "./index.py",
