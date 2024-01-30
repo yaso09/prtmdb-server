@@ -1,17 +1,7 @@
 from flask import *
-import requests, dotenv, os, json, base64
+import requests, os, json, base64
 
-dotenv.load_dotenv(
-    os.path.join(
-        os.path.dirname(__file__), "..", ".env"
-    )
-)
-
-api = "https://script.google.com/macros/s/" + dotenv.get_key(
-    os.path.join(
-        os.path.dirname(__file__), "..", ".env"
-    ), "GOOGLE_APPS_SCRIPT_DEPLOYMENT_ID"
-) + "/exec"
+api = "https://script.google.com/macros/s/" + "AKfycbzdM9K9BO3CLVK2Wyd-AJCMTpil1VLPbukygTABw32rUdJtifoghZhcBsr_iqiOyEo7UA" + "/exec"
 
 app = Flask(__name__)
 
@@ -164,5 +154,5 @@ def api_req_param(req, param):
     return json.loads('{"error": 1}')
 
 if __name__ == "__main__":
-    app.run()
+    app.run(host="0.0.0.0", port=3000)
 
