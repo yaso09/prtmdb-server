@@ -54,44 +54,46 @@ def not_found(err):
 @app.route("/api/<req>", methods=["GET", "POST"])
 def api_req(req):
     if request.method == "POST":
-        if param == "insertsheet":
-            pass
-        
-        res = requests.post(
-            f"{api}?id={req}&type=create",
-            headers={
-                "Accept": "application/json",
-                "Content-Type": "application/json"
-            },
-            data=json.dumps(decomp(request.get_json())[1:])
-        )
-        return json.loads(res.content)
+        try:
+            res = requests.post(
+                f"{api}?id={req}&type=create",
+                headers={
+                    "Accept": "application/json",
+                    "Content-Type": "application/json"
+                },
+                data=json.dumps(decomp(request.get_json())[1:])
+            )
+            return json.loads(res.content)
+        except ValueError: return json.loads('{"error": 1}')
     if request.method == "PATCH":
         row = request.get_json()
         row = row[0]
         column = decomp(request.get_json()[1:])[1]
-        
-        res = requests.post(
-            f"{api}?id={req}&type=update&row={row}&column={column}",
-            headers={
-                "Accept": "application/json",
-                "Content-Type": "application/json"
-            },
-            data=json.dumps(decomp(request.get_json()[1:])[1:])
-        )
-        return json.loads(res.content)
+        try:
+            res = requests.post(
+                f"{api}?id={req}&type=update&row={row}&column={column}",
+                headers={
+                    "Accept": "application/json",
+                    "Content-Type": "application/json"
+                },
+                data=json.dumps(decomp(request.get_json()[1:])[1:])
+            )
+            return json.loads(res.content)
+        except ValueError: return json.loads('{"error": 1}')
     if request.method == "DELETE":
         dat = request.get_json()
         dat = dat[0]
-        res = requests.post(
-            f"{api}?id={req}&type=delete&row={dat}",
-            headers={
-                "Accept": "application/json",
-                "Content-Type": "application/json"
-            },
-            data="empty"
-        )
-        return json.loads(res.content)
+        try:
+            res = requests.post(
+                f"{api}?id={req}&type=delete&row={dat}",
+                headers={
+                    "Accept": "application/json",
+                    "Content-Type": "application/json"
+                },
+                data="empty"
+            )
+            return json.loads(res.content)
+        except ValueError: return json.loads('{"error": 1}')
     res = requests.get(f"{api}?id={req}")
     try:
         return json.loads(res.content)
@@ -103,41 +105,46 @@ def api_req_param(req, param):
     if request.method == "POST":
         if param == "insertsheet":
             pass
-        res = requests.post(
-            f"{api}?id={req}&sheet={param}&type=create",
-            headers={
-                "Accept": "application/json",
-                "Content-Type": "application/json"
-            },
-            data=json.dumps(decomp(request.get_json())[1:])
-        )
-        return json.loads(res.content)
+        try:
+            res = requests.post(
+                f"{api}?id={req}&sheet={param}&type=create",
+                headers={
+                    "Accept": "application/json",
+                    "Content-Type": "application/json"
+                },
+                data=json.dumps(decomp(request.get_json())[1:])
+            )
+            return json.loads(res.content)
+        except ValueError: return json.loads('{"error": 1}')
     if request.method == "PATCH":
         row = request.get_json()
         row = row[0]
         column = decomp(request.get_json()[1:])[1]
-        res = requests.post(
-            f"{api}?id={req}&sheet={param}&type=update&row={row}&column={column}",
-            headers={
-                "Accept": "application/json",
-                "Content-Type": "application/json"
-            },
-            data=json.dumps(decomp(request.get_json()[1:])[1:])
-        )
-        return json.loads(res.content)
+        try:
+            res = requests.post(
+                f"{api}?id={req}&sheet={param}&type=update&row={row}&column={column}",
+                headers={
+                    "Accept": "application/json",
+                    "Content-Type": "application/json"
+                },
+                data=json.dumps(decomp(request.get_json()[1:])[1:])
+            )
+            return json.loads(res.content)
+        except ValueError: return json.loads('{"error": 1}')
     if request.method == "DELETE":
         dat = request.get_json()
         dat = dat[0]
-        
-        res = requests.post(
-            f"{api}?id={req}&sheet={param}&type=delete&row={dat}",
-            headers={
-                "Accept": "application/json",
-                "Content-Type": "application/json"
-            },
-            data="empty"
-        )
-        return json.loads(res.content)
+        try:
+            res = requests.post(
+                f"{api}?id={req}&sheet={param}&type=delete&row={dat}",
+                headers={
+                    "Accept": "application/json",
+                    "Content-Type": "application/json"
+                },
+                data="empty"
+            )
+            return json.loads(res.content)
+        except ValueError: return json.loads('{"error": 1}')
     res = requests.get(f"{api}?id={req}&sheet={param}")
     try:
         return json.loads(res.content)
